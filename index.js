@@ -13,3 +13,56 @@
 // Step 4: Reusable Utilities
 // - Create modular utility functions, such as createElement(tag, attributes).
 // - Ensure all functions follow DRY principles for maintainability.
+
+function addElementToDOM(elementId, text) {
+  const element = document.getElementById(elementId)
+  if (element) {
+    element.textContent += text
+  }
+}
+
+function removeElementFromDOM(elementId) {
+  const element = document.getElementById(elementId)
+  if (element) {
+    element.remove()
+  }
+}
+
+function simulateClick(elementId, message) {
+  const element = document.getElementById(elementId)
+  if (element) {
+    element.textContent += message
+  }
+}
+
+function handleFormSubmit(formId, outputId) {
+  const form = document.getElementById(formId)
+  const output = document.getElementById(outputId)
+  const errorMessage = document.getElementById('error-message')
+
+  if (!form || !output) return
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const input = document.getElementById('user-input')
+
+    if (!input.value.trim()) {
+      errorMessage.textContent = 'Input cannot be empty'
+      errorMessage.classList.remove('hidden')
+      return
+    }
+
+    errorMessage.textContent = ''
+    errorMessage.classList.add('hidden')
+
+    output.textContent += input.value
+  })
+}
+
+module.exports = {
+  addElementToDOM,
+  removeElementFromDOM,
+  simulateClick,
+  handleFormSubmit,
+}
